@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta  charset="utf-8">
+        <title>海洋生物视频平台</title>
+        
+        <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css"  media="all">
+        
+
+        <style type="text/css" >
+            .nav{
+                width: 100%;
+                height: 40px;
+                background-color: chartreuse;
+            }
+            .nav .h-ul{
+                list-style: none;
+ 
+                margin-left: 50px;
+            }
+            
+            .nav .h-ul li{
+                display: inline;
+ 
+                line-height: 40px;
+
+                margin-left: 40px;
+
+                float:left
+
+            }
+            /* div从上到下从左到右自动换行显示排列 */
+            .box-show-vido-1{
+                display:flex;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                align-content: flex-start;
+            }
+
+            .left-class ul li{
+                width: 60px;
+                height: 30px;
+                margin: auto;
+            }
+
+            .right-video{
+                display: flex;
+				justify-content: flex-start;
+				flex-wrap: wrap;
+				align-content: flex-start;
+            }
+
+            .boom{
+                text-align: center;
+                flood-color: blue;
+            }
+
+            
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="nav">
+            <ul class="h-ul">
+                <li><a>首页</a></li>
+                <li><a>团队介绍</a></li>
+                <li><a>联系我们</a></li>
+            </ul>
+        </div>
+
+        <div class="layui-carousel" id="test2" style="padding-top: 5px;  margin: auto; ">
+            <div carousel-item="" style="text-align: center;">
+              <div style="background-color: chocolate;" >条目1</div>
+              <div style="background-color:cornflowerblue;">条目2</div>
+              <div style="background-color: crimson;">条目3</div>
+              <div style="background-color: darkblue;">条目4</div>
+              <div style="background-color: darkgreen;">条目5</div>
+            </div>
+        </div>
+
+        <div style="width: 90%; margin: 20px auto ;">
+            <span>直播</span>  
+            <a style="float: right;">更多></a>
+        </div>
+
+        <hr style="margin:10px auto;" width="90%">
+        <!-- 直播框 -->
+        <div  class="box-show-vido-1" style="width: 90%; margin: 10px auto;  ">
+
+            <div class="eare-one" style="width: 150px;height: 150px;  position:relative;  border:1px solid #c0c0c0;margin:30px 20px 0 0;">
+                <div style="width: 100%; height: 130px; background-color: darkmagenta;">  </div>
+                <p style="position:absolute; left: 10px; bottom: 1px;" >海南 . 三沙</p> 
+            </div>
+
+            <div class="eare-one" style="width: 150px;height: 150px;  position:relative;  border:1px solid #c0c0c0;margin:30px 20px 0 0;">
+                <div style="width: 100%; height: 130px; background-color: darkmagenta;">  </div>
+                <p style="position:absolute; left: 10px; bottom: 1px;" >海南 . 三沙</p> 
+            </div>
+
+            <div class="eare-one" style="width: 150px;height: 150px;  position:relative;  border:1px solid #c0c0c0;margin:30px 20px 0 0;">
+                <div style="width: 100%; height: 130px; background-color: darkmagenta;">  </div>
+                <p style="position:absolute; left: 10px; bottom: 1px;" >海南 . 三沙</p> 
+            </div>
+
+            <div class="eare-one" style="width: 150px;height: 150px;  position:relative;  border:1px solid #c0c0c0;margin:30px 20px 0 0;">
+                <div style="width: 100%; height: 130px; background-color: darkmagenta;">  </div>
+                <p style="position:absolute; left: 10px; bottom: 1px;" >海南 . 三沙</p> 
+            </div>
+
+            <div class="eare-one" style="width: 150px;height: 150px;  position:relative;  border:1px solid #c0c0c0;margin:30px 20px 0 0;">
+                <div style="width: 100%; height: 130px; background-color: darkmagenta;">  </div>
+                <p style="position:absolute; left: 10px; bottom: 1px;" >海南 . 三沙</p> 
+            </div>
+
+            <div class="eare-one" style="width: 150px;height: 150px;  position:relative;  border:1px solid #c0c0c0;margin:30px 20px 0 0;">
+                <div style="width: 100%; height: 130px; background-color: darkmagenta;">  </div>
+                <p style="position:absolute; left: 10px; bottom: 1px;" >海南 . 三沙</p> 
+            </div>
+
+        </div> 
+          <!--end  直播框 结束 --> 
+          <!-- 清除浮动 -->
+        <div class="clear-float-1" style="clear:both"></div>
+
+        <div style="width: 90%; margin: 20px auto;">
+            <span>海洋生物</span>  
+            <div style="float: right;">
+                <input type="text" name="seach" style="margin-right: 20px;">
+                <input type="submit" value="搜索" style="margin-right: 20px;">
+                <a style="float: right;margin-right: 20px;">更多></a>
+            </div>
+            
+        </div>
+         
+        <hr style="margin:10px auto;" width="90%">
+
+        <div style="width: 90%; margin: 20px auto; ">
+            <!-- 左边分类框 -->
+            <div class="left-class" style="width: 120px; height: auto; border-style:ridge; float: left;">
+                <ul>
+                    <li><a>分类1</a></li>
+                    <li><a>分类2</a></li>
+                    <li><a>分类3</a></li>
+                    <li><a>分类4</a></li>
+                    <li><a>分类5</a></li>
+                    <li><a>分类6</a></li>
+                    <li><a>分类7</a></li>
+                    <li><a>分类8</a></li>
+                    <li><a>分类9</a></li>
+                    <li><a>分类10</a></li>
+                    <li><a>分类11</a></li>
+                    <li><a>分类12</a></li>
+                </ul>
+            </div>
+            <!-- 右边视频数据  循环输出 -->
+            <div class=" right-video"  style="width: 80%; margin: auto;   float: left;" th:each="info:${page.records}" >
+                <div class="eare-one" style="width: 150px;height: 150px;  position:relative;  border:1px solid #c0c0c0;margin:0 10px 10px 20px;">
+                   	<a th:href="@{'/showPage?id='+${info.getId()}}">
+                   		<div style="width: 100%; height: 130px;"> 
+                   			<img th:src="'http://210.37.1.20/file/videoImg/'+${info.getSrcName()}+'.jpg'" width="100%;height:130px;">
+                   		</div>	
+						<span  th:text="${info.getSrcName()}">标题</span>   
+			    	</a>
+                </div>
+            </div>
+
+        </div>
+        <!-- 清除浮动 -->
+        <div class="clear-float-2" style="clear:both"></div>
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 5px;">
+            <legend style="margin: auto">海南师范大学</legend>
+          </fieldset>
+
+        <!-- <include src="./boom.html"></include> -->
+
+        <div class="boom">
+            <p>技术支持 @ 技术项目组-海南师范大学信息网络与数据中心 </p>
+        </div>
+
+        <script src="https://www.layuicdn.com/layui/layui.js"  charset="utf-8"></script>
+        <script>
+            layui.use(['carousel', 'form'], function(){
+              var carousel = layui.carousel
+              ,form = layui.form;
+              
+              
+              
+              //改变下时间间隔、动画类型、高度
+              carousel.render({
+                elem: '#test2'
+                ,interval: 2800
+                ,anim: 'fade'
+                ,width: '90%'
+                ,height: '220px'
+              });
+              
+
+
+              var $ = layui.$, active = {
+                set: function(othis){
+                  var THIS = 'layui-bg-normal'
+                  ,key = othis.data('key')
+                  ,options = {};
+                  
+                  othis.css('background-color', '#5FB878').siblings().removeAttr('style'); 
+                  options[key] = othis.data('value');
+                  ins3.reload(options);
+                }
+              };
+              
+              //监听开关
+              form.on('switch(autoplay)', function(){
+                ins3.reload({
+                  autoplay: this.checked
+                });
+              });
+              
+              $('.demoSet').on('keyup', function(){
+                var value = this.value
+                ,options = {};
+                if(!/^\d+$/.test(value)) return;
+                
+                options[this.name] = value;
+                ins3.reload(options);
+              });
+              
+              //其它示例
+              $('.demoTest .layui-btn').on('click', function(){
+                var othis = $(this), type = othis.data('type');
+                active[type] ? active[type].call(this, othis) : '';
+              });
+            });
+            </script>
+     
+        
+    </body>
+
+
+    
+</html>
