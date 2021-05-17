@@ -13,12 +13,12 @@
 	<groupId>com.hs.sea_water</groupId>
 	<artifactId>seaWater</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>seaWater</name>
 	<description>Demo project for Spring Boot</description>
 	
 	<properties>
-		<java.version>11</java.version>
+		<java.version>8</java.version>
 	</properties>
 	
 	<dependencies>
@@ -75,6 +75,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
+		</dependency>
+		
+	<!-- @yuxuhang javac 截图 + ffmpeg -->
+		<dependency>
+	        <groupId>org.bytedeco</groupId>
+	        <artifactId>javacv</artifactId>
+	        <version>1.4.3</version>
+  		</dependency>
+  		<dependency>
+			<groupId>org.bytedeco.javacpp-presets</groupId>
+			<artifactId>ffmpeg-platform</artifactId>
+			<version>4.0.2-1.4.3</version>
 		</dependency>
 
 	</dependencies>

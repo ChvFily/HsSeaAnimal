@@ -15,7 +15,7 @@
             }
             .nav .h-ul{
                 list-style: none;
- 
+                
                 margin-left: 50px;
             }
             
@@ -27,41 +27,33 @@
                 margin-left: 40px;
 
                 float:left
-
             }
-            /* div从上到下从左到右自动换行显示排列 */
+            
             .box-show-vido-1{
-                display:flex;
-                justify-content: flex-start;
-                flex-wrap: wrap;
-                align-content: flex-start;
+                display: flex;
+				justify-content: flex-start;
+				flex-wrap: wrap;
+				align-content: flex-start;
             }
-
+            
             .left-class ul li{
                 width: 60px;
                 height: 30px;
                 margin: auto;
             }
-
             .right-video{
                 display: flex;
 				justify-content: flex-start;
 				flex-wrap: wrap;
 				align-content: flex-start;
             }
-
             .boom{
                 text-align: center;
                 flood-color: blue;
             }
-
-            
         </style>
-
     </head>
-
     <body>
-
         <div class="nav">
             <ul class="h-ul">
                 <li><a>首页</a></li>
@@ -135,37 +127,105 @@
         </div>
          
         <hr style="margin:10px auto;" width="90%">
-
-        <div style="width: 90%; margin: 20px auto; ">
-            <!-- 左边分类框 -->
-            <div class="left-class" style="width: 120px; height: auto; border-style:ridge; float: left;">
-                <ul>
-                    <li><a>分类1</a></li>
-                    <li><a>分类2</a></li>
-                    <li><a>分类3</a></li>
-                    <li><a>分类4</a></li>
-                    <li><a>分类5</a></li>
-                    <li><a>分类6</a></li>
-                    <li><a>分类7</a></li>
-                    <li><a>分类8</a></li>
-                    <li><a>分类9</a></li>
-                    <li><a>分类10</a></li>
-                    <li><a>分类11</a></li>
-                    <li><a>分类12</a></li>
-                </ul>
+		<!-- 视频展示端 -->
+        <div style="width: 90%;height:1600px; margin: 20px auto; ">
+        	<!-- 左边分类框 -->
+		    <div class="left-class" style="width: 200px; height:100%; float: left;">
+        		<div class="layui-panel" style="width: 200px;">
+        		<ul class="layui-menu" id="docDemoMenu1" style="width: 200px;">
+        			<li class="layui-menu-item-divider" style="width: 200px;"></li>
+        			<!-- 第一个 li 数据 -->
+  					<li class="layui-menu-item-parent" lay-options="{type: 'parent'}" style="margin-top: 10px;width: 200px;">
+		      			<div class="layui-menu-body-title" >
+		      			少儿科普<i class="layui-icon layui-icon-right"></i>
+				      	</div>
+				      	<div class="layui-panel layui-menu-body-panel">
+					        <ul >
+					          <li lay-options="{id: 3111}" style="width:100px;">
+					            <div class="layui-menu-body-title" >养殖</div>
+					          </li>
+					          <li lay-options="{id: 3112}" style="width:100px;">
+					            <div class="layui-menu-body-title" >有毒</div>
+					          </li>
+					          <li lay-options="{id: 3113}" style="width:100px;">
+					            <div class="layui-menu-body-title" >濒危</div>
+					          </li>
+					          <li lay-options="{id: 3114}" style="width:100px;">
+					            <div class="layui-menu-body-title" >最字</div>
+					          </li>
+					        </ul>
+				      	</div>
+			    	</li>
+			    	<!-- end first li -->
+			    	<li class="layui-menu-item-divider" style="width: 200px;"></li>
+			    	
+			    	<!-- 第一个 li 数据 -->
+  					<li class="layui-menu-item-parent" lay-options="{type: 'parent'}" style="margin-top: 10px;width: 200px;">
+		      			<div class="layui-menu-body-title">
+		      			海洋动物<i class="layui-icon layui-icon-right"></i>
+				      	</div>
+				      	<div class="layui-panel layui-menu-body-panel">
+					        <ul>
+					          <li lay-options="{id: 1111}" style="width:100px;">
+					            <div class="layui-menu-body-title" >养殖</div>
+					          </li>
+					          <li lay-options="{id: 1112}" style="width:100px;">
+					            <div class="layui-menu-body-title" >有毒</div>
+					          </li>
+					          <li lay-options="{id: 1113}" style="width:100px;">
+					            <div class="layui-menu-body-title" >濒危</div>
+					          </li>
+					          <li lay-options="{id: 1114}" style="width:100px;">
+					            <div class="layui-menu-body-title" >最字</div>
+					          </li>
+					        </ul>
+				      	</div>
+			    	</li>
+			    	<!-- end first li -->
+			    	<li class="layui-menu-item-divider" style="width: 200px;"></li>
+			    	
+			    	<!-- 第一个 li 数据 -->
+  					<li class="layui-menu-item-parent" lay-options="{type: 'parent'}" style="margin-top: 10px;width: 200px;">
+		      			<div class="layui-menu-body-title">
+		      			海洋植物<i class="layui-icon layui-icon-right"></i>
+				      	</div>
+				      	<div class="layui-panel layui-menu-body-panel">
+					        <ul>
+					          <li lay-options="{code: 2111}" style="width:100px;">
+					            <div class="layui-menu-body-title" >养殖</div>
+					          </li>
+					          <li lay-options="{code: 2112}" style="width:100px;">
+					            <div class="layui-menu-body-title" >有毒</div>
+					          </li>
+					          <li lay-options="{code: 2113}" style="width:100px;">
+					            <div class="layui-menu-body-title" >濒危</div>
+					          </li>
+					          <li lay-options="{code: 2114}" style="width:100px;">
+					            <div class="layui-menu-body-title" >最字</div>
+					          </li>
+					        </ul>
+				      	</div>
+			    	</li>
+			    	<!-- end first li -->
+			    	<li class="layui-menu-item-divider" style="width: 200px;"></li>
+			    </ul>
+				</div>
             </div>
             <!-- 右边视频数据  循环输出 -->
-            <div class=" right-video"  style="width: 80%; margin: auto;   float: left;" th:each="info:${page.records}" >
-                <div class="eare-one" style="width: 150px;height: 150px;  position:relative;  border:1px solid #c0c0c0;margin:0 10px 10px 20px;">
-                   	<a th:href="@{'/showPage?id='+${info.getId()}}">
-                   		<div style="width: 100%; height: 130px;"> 
-                   			<img th:src="'http://210.37.1.20/file/videoImg/'+${info.getSrcName()}+'.jpg'" width="100%;height:130px;">
-                   		</div>	
-						<span  th:text="${info.getSrcName()}">标题</span>   
+            <div class="right-video"  style="width: 80%; margin: auto;   
+            		float: left;
+            		display: flex;
+					justify-content: flex-start;
+					flex-wrap: wrap;
+					align-content: flex-start;"
+				  >
+                <div th:each="info:${page.records}" class="src-eare" style="width: 150px;height: 120px;  position:relative;  border:1px solid #c0c0c0;margin:0 10px 10px 20px;">
+                   	<a th:href="@{'/showPage?id='+${info.getId()}}" style="width:150px;height:120px;">
+                   		<img th:src="'http://210.37.1.20/file/videoImg/'+${info.getiName()}+'.jpg'" style="width:100%;height:100px;">	
+						<span th:text="${info.getiTitle()}">标题</span>   
 			    	</a>
                 </div>
             </div>
-
         </div>
         <!-- 清除浮动 -->
         <div class="clear-float-2" style="clear:both"></div>
@@ -182,11 +242,23 @@
 
         <script src="https://www.layuicdn.com/layui/layui.js"  charset="utf-8"></script>
         <script>
-            layui.use(['carousel', 'form'], function(){
+            layui.use(['carousel', 'form' ,'dropdown'], function(){
               var carousel = layui.carousel
-              ,form = layui.form;
+              ,form = layui.form
+              ,dropdown = layui.dropdown;
               
-              
+              // 菜单点击 事件
+              //菜单点击事件，其中 docDemoMenu1 对应的是菜单结构上的 id 指 
+			  dropdown.on('click(docDemoMenu1)', function(options){
+			    var othis = $(this); //当前菜单列表的 DOM 对象
+			    // console.log(options); //菜单列表的 lay-options 中的参数
+			    
+			    //点击小分类事件 操作，展示对应的数据
+			    alert(options["code"]);
+			    
+			    // 传递搜索条件 并展示相应的内容
+			    
+			  });
               
               //改变下时间间隔、动画类型、高度
               carousel.render({
@@ -197,7 +269,6 @@
                 ,height: '220px'
               });
               
-
 
               var $ = layui.$, active = {
                 set: function(othis){
@@ -234,7 +305,6 @@
               });
             });
             </script>
-     
         
     </body>
 

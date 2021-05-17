@@ -14,39 +14,53 @@ public class Info {
 	
 	@TableId(value="id",type = IdType.AUTO)
 	private int id;
-	@TableField("introduce")
-	private String introduce; // 简介内容
-	@TableField("src_name")
-	private String srcName; //视频显示名称 中文
-	@TableField("src_code")
-	private String srcCode;
+	// 简介
+	@TableField("i_introduce")
+	private String iIntroduce; // 简介内容
+	// 资源的英文称
+	@TableField("i_name")
+	private String iName; 
+	// 资源编码 1-000  动物 or 植物  - 类别名称
+	@TableField("i_code")
+	private String iCode;
+	//视频对应的id
 	@TableField("v_id")
 	private int vId; //视频对应 的 id
+	//图片对应的id
 	@TableField("i_id")
 	private int iId; //图片对应的 id
+	//资源类别名称
+	@TableField("i_code_title")
+	private String iCodeTitle;
+	//中文名称
+	@TableField("i_title")
+	private String iTitle;
+	//资源的类别 0.视频 1.图片
+	@TableField("i_src_type")
+	private String iSrcType;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getIntroduce() {
-		return introduce;
+	public String getiIntroduce() {
+		return iIntroduce;
 	}
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
+	public void setiIntroduce(String iIntroduce) {
+		this.iIntroduce = iIntroduce;
 	}
-	public String getSrcName() {
-		return srcName;
+	public String getiName() {
+		return iName;
 	}
-	public void setSrcName(String srcName) {
-		this.srcName = srcName;
+	public void setiName(String iName) {
+		this.iName = iName;
 	}
-	public String getSrcTypeCode() {
-		return srcCode;
+	public String getiCode() {
+		return iCode;
 	}
-	public void setSrcTypeCode(String srcTypeCode) {
-		this.srcCode = srcTypeCode;
+	public void setiCode(String iCode) {
+		this.iCode = iCode;
 	}
 	public int getvId() {
 		return vId;
@@ -60,7 +74,24 @@ public class Info {
 	public void setiId(int iId) {
 		this.iId = iId;
 	}
+	public String getiCodeTitle() {
+		return iCodeTitle;
+	}
+	public void setiCodeTitle(String iCodeTitle) {
+		this.iCodeTitle = iCodeTitle;
+	}
+	public String getiTitle() {
+		return iTitle;
+	}
+	public void setiTitle(String iTitle) {
+		this.iTitle = iTitle;
+	}
+	public String getiSrcType() {
+		return iSrcType;
+	}
+	public void setiSrcType(String iSrcType) {
+		this.iSrcType = iSrcType;
+	}
 	
 	
-
 }

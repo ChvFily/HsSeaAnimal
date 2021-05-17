@@ -19,9 +19,9 @@ public interface IVideoMapper extends BaseMapper<Video>{
 	 * BaseMapper 存在了对 video 的增删查改方法
 	 * */
 	
-	@Select("select * from src_video")
+	@Select("select * from video")
 	public List<Video> getVideoAll();
 	
-//	@Select("select * from src_video where id = ?")
+//	@Select("select * from video where id = ?")
 //	public Video getVideoById(int id);
 }

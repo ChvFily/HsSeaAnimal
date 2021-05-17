@@ -3,18 +3,13 @@ package com.hs.sea_water.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -24,8 +19,6 @@ import com.hs.sea_water.mapper.IInfoMapper;
 import com.hs.sea_water.mapper.IVideoMapper;
 import com.hs.sea_water.service.IInfoService;
 import com.hs.sea_water.service.IVideoService;
-import com.hs.sea_water.serviceI.mpl.InfoServiceImpl;
-import com.hs.sea_water.serviceI.mpl.VideoServiceImpl;
 
 @CrossOrigin //支持跨域问题
 @Controller  // 表示默认视图路径
@@ -36,9 +29,8 @@ public class webController implements ErrorController{
 	
 	@Autowired IInfoMapper m_infoMapper;
 	@Autowired IVideoMapper m_videoMapper;
-	@Autowired VideoServiceImpl vs;
-	@Autowired InfoServiceImpl is;
-	
+	@Autowired IVideoService vs;
+	@Autowired IInfoService is;
 	
 	/**
 	 * 测试返回主页
@@ -64,16 +56,15 @@ public class webController implements ErrorController{
 		/**
 		 * 返回直播数据
 		 * 返回视频数据
-		 * 数据分析
+		 * 返回分类数据
 		 * */
-//		List<Video> videoList = m_videoMapper.getVideoAll();
-//		List<Info> infoList = m_infoMapper.getVideoAll();
-		
 		if(pageIndex==null||pageIndex<1) pageIndex=1;
 		Page<Info> p = new Page<>(pageIndex,18);
 		long totalPages = 0;//总页数
 		try {
-			IPage<Info> rs = is.page(p,Wrappers.lambdaQuery(Info.class).orderByDesc(Info::getId));
+			IPage<Info> rs = is.page(p,Wrappers.lambdaQuery(Info.class)
+					.eq(Info::getiSrcType, "0") // 0.视频 1.图片
+					.orderByDesc(Info::getId));
 			totalPages = rs.getPages();
 		}catch (Exception e) {
 			e.printStackTrace();

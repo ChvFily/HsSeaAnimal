@@ -9,10 +9,10 @@
 <body style="background: #fff;">
 	<!--  <div th:replace="fragment/header"></div>  -->
 	<div class="container px-3 bg-white my-2 pt-2 pb-1">
-		<h5><b th:text="${video.getvName()}">标题</b></h5>
+		<h5><b th:text="${video.getvTitle()}">标题</b></h5>
 		<b>发布：</b><span style="margin-right: 20px;">2021</span>
-		<b>分类：</b><span th:text="${video.getvName}">分类</span>
-		<p><b>简介：</b><span th:text="${info.getIntroduce()}">视频简介</span><p>
+		<b>分类：</b><span th:text="${info.getiCodeTitle()}">分类</span>
+		<p><b>简介：</b><span th:text="${info.getiIntroduce()}">视频简介</span><p>
 	</div>
 	<div class="container px-0 d-flex justify-content-center">
 		 <video width="100%" th:src="'http://210.37.1.20/file/'+${video.getvPath()}" controls="controls">您的浏览器暂不支持</video> 
