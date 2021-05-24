@@ -12,6 +12,8 @@ public class Info {
 	
 	private static final long serialVersionUID = 1L;
 	
+	
+	
 	@TableId(value="id",type = IdType.AUTO)
 	private int id;
 	// 简介
@@ -38,6 +40,16 @@ public class Info {
 	//资源的类别 0.视频 1.图片
 	@TableField("i_src_type")
 	private String iSrcType;
+	
+	@TableField("i_icon_path")
+	private String iIconPath;
+	
+	public String getiIconPath() {
+		return iIconPath;
+	}
+	public void setiIconPath(String iIconPath) {
+		this.iIconPath = iIconPath;
+	}
 	public int getId() {
 		return id;
 	}

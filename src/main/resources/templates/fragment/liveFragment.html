@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+	 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<p th:if="${not #lists.isEmpty(streams)}" style="font-size:24px;" class="mt-3 mb-0"><a href="#" style="text-decoration: none;color:#303030;"></a></p>
+ <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4" style="
+ 		float: left;
+        display: flex;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+		align-content: flex-start;" >
+    <div class="col my-3 " th:each="v,vStat:${streams}">
+    	<div th:if="${vStat.index<4}" class="bg-white pb-2">
+		    <div  style="width: 200px;height: 160px;  position:relative; margin:30px 20px 0 0;">
+			    	<div  class="bg-white pb-2">
+					    <a th:href="@{'/liveDetails?id='+${v.id}+'&ip='+${v.ip}}" class="text-dark" target="_blank" >
+							<img th:src="'http://210.37.1.20:80/file/liveImg/'+${v.name}+'.jpg'" style="width:100%;height:140px;" class="bg-secondary">
+					    </a>
+				    </div>
+				    <div class="d-flex px-2">
+						<b class="flex-grow-1"><span th:text="${v.name}"></span></b>  
+						<span style="float:right;" >在线人数:<font color="red"><b th:text="${v.clients-1}">30</b></font></span>  					
+					</div>	
+					<div style="clear:both;"></div> <!-- 去除浮动 -->
+				</div>
+	    </div>
+	   
+    </div><!-- poster="//vjs.zencdn.net/v/oceans.png"  -->
+</div>
+</html>

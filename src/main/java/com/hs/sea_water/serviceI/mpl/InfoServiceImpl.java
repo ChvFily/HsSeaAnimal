@@ -12,7 +12,7 @@ import com.hs.sea_water.service.IInfoService;
 
 /**
  * <p>
- * 	info 实体类
+ * 	info  实体类
  * </p>
  * @author chvfily
  * @since 2021-05-10
@@ -22,7 +22,7 @@ public class InfoServiceImpl extends ServiceImpl<IInfoMapper,Info> implements II
 	
 	 @Autowired IInfoMapper iInfoMapper; // 需要实例化 通过自动装配实现
 	
-	public InfoServiceImpl() {
+	public InfoServiceImpl(){
 		// TODO Auto-generated constructor stub
 	}
 	

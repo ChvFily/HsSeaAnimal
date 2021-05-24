@@ -38,16 +38,17 @@ public class FirstFrameRefaceTaskUtil {
     	
     	if(enableReface) {
 //    		enableReface  = false;
-    		List<Video> videoList = videoService.getVideoAll().subList(0, 3); // 获取前三个所有视频列表 0,1,2
+    		List<Video> videoList = videoService.getVideoAll(); // 获取前三个所有视频列表 0,1,2
     		String srcPath = "//home//xwcbxy//video//"; //公共资源路径
             // 生成对应的第一帧图像 
     		VideoUtil videoUtil = new VideoUtil();
     		
     		for(Video video:videoList){
     			if(videoList.size()!=0) {
-    				String videoFileName =  srcPath+video.getvPath(); // /home/xwcbxy/video/hs_an_videos/
-    	            String outputPath = srcPath+"videoImg//"+video.getvName()+".jpg"; // /home/xwcbxy/video/videoImg/test.mp4
-    				
+    				String videoFileName =  srcPath+video.getvPath();  // /home/xwcbxy/video/hs_an_videos/
+    				String title = Helper.getNamtAndTime(videoFileName);
+    	            String outputPath = srcPath+"videoImg//"+title+".jpg"; // /home/xwcbxy/video/videoImg/test.mp4
+    	            
 //    	            videoFileName ="D:/video/turtles.mp4";
 //    	            outputPath = "D:/videoImg/turtles.jpg";
     	            

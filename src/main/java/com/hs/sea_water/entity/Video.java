@@ -1,6 +1,7 @@
 package com.hs.sea_water.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -20,7 +21,7 @@ public class Video implements Serializable{
 	@TableField("v_path")
 	private String vPath;
 	@TableField("v_save_time")
-	private String v_SaveTime;
+	private Date vSaveTime;
 	@TableField("v_live_start_time")
 	private String vLiveStartTime;
 	@TableField("v_name")
@@ -50,11 +51,11 @@ public class Video implements Serializable{
 	public void setvPath(String vPath) {
 		this.vPath = vPath;
 	}
-	public String getV_SaveTime() {
-		return v_SaveTime;
+	public Date getVSaveTime() {
+		return vSaveTime;
 	}
-	public void setV_SaveTime(String v_SaveTime) {
-		this.v_SaveTime = v_SaveTime;
+	public void setVSaveTime(Date date) {
+		this.vSaveTime = date;
 	}
 	public String getvLiveStartTime() {
 		return vLiveStartTime;
