@@ -57,7 +57,7 @@ public class SrsController {
 		System.out.println(JSON.toJSONString(dvr));
 		Video v = new Video();
 		Info info = new Info();
-		String puPath = "hs_an_videos/live/"; 
+		String puPath = "/live/"; 
 		String videoTitle = Helper.getFileNameFromUrl(dvr.file); //返回视频名称+时间搓 shuixia.20210316123652703.mp4
 		v.setvPath(puPath+videoTitle);
 		v.setvName(dvr.stream);  //视频名称
@@ -79,24 +79,19 @@ public class SrsController {
 				video_id = vs.getOne(Wrappers.lambdaQuery(Video.class)
 						     .eq(Video::getvPath, v.getvPath())).getId(); 
 				String title = Helper.getNamtAndTime(v.getvPath()); // 视频 chvfily.20212131545651
-				iIconPath = "videoImg/"+title+".jpg"; //预览图片名称
+				iIconPath = "/videoImg/"+title+".jpg"; //预览图片名称
 				info.setiTitle(v.getvTitle());      
 				info.setiCode("3333");  // 3333 代表live直播
 				info.setiCodeTitle("live");
 				info.setiName(v.getvName());
 				info.setiSrcType("0");
-				info.setiId(video_id);
-				info.setvId(0);	
+				info.setvId(video_id);
+				info.setiId(video_id);	
 				info.setiIconPath(iIconPath);
 				is.save(info);
 			}
 		}	
 		return "0";
-	}
-	@RequestMapping("/on_dvr")
-	public String on_dvrCB() {
-		
-		return "on_dvr";
 	}
 
 	// 视频url 地址

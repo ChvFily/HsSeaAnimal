@@ -2,19 +2,25 @@ package com.hs.sea_water.controller;
 
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -50,8 +56,8 @@ public class webController implements ErrorController{
 		List<OnPublish> ret = new ArrayList<>();
 		List<FileServer> fsList = fss.list();  // 获取服务器列表 （多个IP）
 		for(FileServer fs:fsList) {
-			String api = "http://"+fs.getServerIp()+":"+fs.getSrsApiPort(); //http://210.37.1.20:1985/api/v1/streams/
-			String url = api+"/api/v1/streams/";   // http://ip:1985/api/v1/streams/ 推流接口 推流情况
+			String api = "http://"+fs.getServerIp()+":"+fs.getSrsApiPort(); //http://210.37.1.20:11985/api/v1/streams/
+			String url = api+"/api/v1/streams/";   // http://ip:11985/api/v1/streams/ 推流接口 推流情况
 			String rs =  rt.getForObject(url, String.class); // 获取所有的视频流数据   
 			JSONObject jo = JSONObject.parseObject(rs);  //  划分多个视频流数据 推流个数 stream 
 			JSONArray arr = jo.getJSONArray("streams");  // 获取视频流的组
@@ -68,9 +74,9 @@ public class webController implements ErrorController{
 	}
 	
 	/**
-	 * 测试返回主页
+	 * 测试
 	 * */
-	@RequestMapping("/getTest") // 主页
+	@RequestMapping("/getTest") // 
 	@ResponseBody        // 返回的是指定的数据格式
 	public String getting() {
 		List<Info> infoList = is.getInfoAll();
@@ -83,16 +89,19 @@ public class webController implements ErrorController{
 	 * */
 	@RequestMapping("/streams.do")
 	public String streams(Model model) {
+		//List<FileServer> fsList = fss.list();  // 获取服务器列表 （多个IP）
 		//获取视频流列表
 		List<OnPublish> liveList = getActiveStreams();  //返回 
 		String url = "";
-		// String dir = "D:\\liveTempImg/";  //本地图片
-		String dir = "//home//xwcbxy//video//liveImg//"; 
+		 //String dir = "D:\\liveTempImg/";  //本地图片
+		
+		//String path =fsList.get(0).getServerDocDir();
+		String dir = "//mnt//file//sea//liveImg//"; 
 		//获取数据流地址 rtmp
 		//拼凑地址
 		for(OnPublish live:liveList) {
 			// 获取数据流地址
-			url="rtmp://"+live.ip+":1935/"+live.app+"/"+live.name;
+			url="rtmp://"+live.ip+":11935/"+live.app+"/"+live.name;
 			// 生成对应的图片
 			VideoUtil.getFirtPicByStream(url, dir+live.name+".jpg");
 		}
@@ -117,24 +126,106 @@ public class webController implements ErrorController{
 		 * */
 		
 		if(pageIndex==null||pageIndex<1) pageIndex=1;
-		Page<Info> p = new Page<>(pageIndex,18);
-		long totalPages = 0;//总页数
+		Page<Info> p = new Page<>(pageIndex,12);
+		long totalPages = 0; //总页数
+		IPage<Info> rs;
 		try {
-			IPage<Info> rs = is.page(p,Wrappers.lambdaQuery(Info.class)
-					.eq(Info::getiSrcType, "0") // 0.视频 1.图片
+			  rs = is.page(p,Wrappers.lambdaQuery(Info.class)
+					.eq(Info::getiSrcType, "0")  // 0.视频 1.图片
 					.orderByDesc(Info::getId));
-			totalPages = rs.getPages();
+			rs.getPages();
+			totalPages = rs.getPages(); //总页数
 		}catch (Exception e) {
 			e.printStackTrace();
-			
 		} 
-		
 		model.addAttribute("page",p); // 添加数据到 主页点的前端 所有内容
-		model.addAttribute("totalPages",totalPages); //需要展示的页 内容
+		model.addAttribute("totalPages",totalPages); // 需要展示的页数
 		return "index";
 	}
 	
+	
 	/**
+	 * 搜索关键字提示
+	 * */
+	@RequestMapping("/seach")
+	@ResponseBody  // 发送数据能力  
+	public String seachInfo(String seach) {
+		/**
+		 * 根据名称搜索，返回所有的关键字 
+		 * 模糊搜索关键子
+		 * */
+		String titleList = "";
+		List<Info> infos = new ArrayList<>();
+		QueryWrapper<Info> queryWrapper = new QueryWrapper<>();
+	    queryWrapper.like("i_title", seach);
+	    infos = m_infoMapper.selectList(queryWrapper);
+	    for (Info info:infos) {
+	    	titleList+= info.getiTitle()+",";
+	    }
+		return titleList ;
+	}
+	
+	/**
+	 * 根据检索或分类返回视频数据
+	 * 
+	 * */
+	@RequestMapping("/re_v")
+	public String reVideo(Model model,Integer pageIndex,String seachInfo) {
+		if(pageIndex==null||pageIndex<1) pageIndex=1;
+		//System.out.println(a.toString()); 
+		Page<Info> p = new Page<>(pageIndex,12);
+		long totalPages = 0; //总页数
+		try {
+			IPage<Info> rs = is.page(p,Wrappers.lambdaQuery(Info.class)
+					.eq(Info::getiTitle, seachInfo)  //搜索关键字段的数据
+					.orderByDesc(Info::getId));
+			totalPages = rs.getPages();
+		}catch (Exception e) {
+			e.printStackTrace();	
+		}
+		// 封装 Page 
+		model.addAttribute("page",p);
+		model.addAttribute("seachInfo",seachInfo);
+		return "fragment/re-v";	
+	}
+	
+	/**
+	 * 返回
+	 * */
+	@RequestMapping("/re")
+	public String rePage(Model model,Integer pageIndex ,String seachInfo) {
+		if(pageIndex==null||pageIndex<1) pageIndex=1;
+		//System.out.println(a.toString()); 
+		Page<Info> p = new Page<>(pageIndex,12);
+		long totalPages = 0; //总页数
+		if(seachInfo.isEmpty()) { //如果为null 则查询所有
+			try {
+				IPage<Info> rs = is.page(p,Wrappers.lambdaQuery(Info.class)
+						.orderByDesc(Info::getId));
+				totalPages = rs.getPages();
+			}catch (Exception e) {
+				e.printStackTrace();	
+			}
+		}else {
+			try {
+				IPage<Info> rs = is.page(p,Wrappers.lambdaQuery(Info.class)
+						.eq(Info::getiTitle, seachInfo)  //搜索关键字段的数据
+						.orderByDesc(Info::getId));
+				totalPages = rs.getPages();
+			}catch (Exception e) {
+				e.printStackTrace();	
+			}
+		}
+		// 封装 Page 
+		model.addAttribute("page",p);
+		model.addAttribute("seachInfo",seachInfo);
+		model.addAttribute("totalPages",totalPages);
+		return "fragment/re";
+	}
+	
+	
+	/**
+	 * 视频播放详情页面，包括视频简介功能
 	 * 根据 info.id 进入show-page.html
 	 * @author chvfily
 	 * @param id info.id
@@ -144,14 +235,16 @@ public class webController implements ErrorController{
 		/**
 		 * 根据id返回视频或图片数据
 		 * */
-		Video video =vs.getVideoById(id);
 		Info info = is.getInfoById(id);
+		Video video =vs.getVideoById(info.getvId());
 		model.addAttribute("video",video);
 		model.addAttribute("info",info);
 		return "show-page";
 	}
 	
-	
+	/**
+	 * 直播详情页面
+	 * */
 	@RequestMapping("/liveDetails")   // url = /liveDetails?id=xxxx&ip=  通过 get 方式 获取 数据
     public String liveDetails(String ip,String id,Model model){
 //		if(id==null || ip==null) return "liveDetails";
@@ -178,7 +271,6 @@ public class webController implements ErrorController{
 		 * 获取LiveStream 数据
 		 * 循环遍历
 		 * 返回对应id的 clients
-		 *  
 		 * */
 		int liveClients = 0;
 		List<OnPublish> LsList = new ArrayList<>(); // 存放 getActiveStreams() LiveStream

@@ -1,0 +1,55 @@
+<html xmlns:th="http://www.thymeleaf.org" >
+  <!-- 视频页面  循环输出  -->
+				<div  id="show-v" 
+					style="float: left;
+            		display: flex;
+					justify-content: flex-start;
+					flex-wrap: wrap;
+					align-content: flex-start;">
+	                <div th:each="info:${page.records}" class="src-eare" style="width: 200px;height: 160px;  position:relative; margin:0 10px 10px 20px;">
+	                   	<a th:href="@{'/showPage?id='+${info.getId()}}" style="width:200px;height:160px;">
+	                   		<img th:src="'http://210.37.8.148:8888/sea'+${info.getiIconPath()}" style="width:100%;height:140px;">	
+							<span th:text="${info.getiTitle()}">标题</span>   
+				    	</a>
+	                </div>
+                </div>
+                <!-- 清除浮动 -->
+        		<div class="clear-float-2" style="clear:both"></div>
+                <!-- 页数 -->
+                <!-- 页码展示 -->
+				<div id = "show-p" class="container px-1"  style="width:90px;height:54px">
+					<div th:if="${page.total>0}" >
+						<nav aria-label="Page navigation example">
+						  <ul class="pagination justify-content-center">
+						    <li class="page-item " th:classappend="${!page.hasPrevious}?'disabled' ">
+						    	<a class="page-link" th:href="'/re?pageIndex='+${page.current-1}+'&seachInfo='+seachInfo" aria-label="Previous">
+							        <span aria-hidden="true">&laquo;</span>
+							     </a>
+						    </li>
+						    <li th:if="${page.current-3>0}" class="page-item">
+						    	<a class="page-link" th:href="'/re?pageIndex='+${page.current-3}+'&seachInfo='+seachInfo" th:text="${page.current-3}">1</a></li>
+						    <li th:if="${page.current-2>0}" class="page-item">
+						    	<a class="page-link" th:href="'/re?pageIndex='+${page.current-2}+'&seachInfo='+seachInfo" th:text="${page.current-2}">1</a></li>
+						    <li th:if="${page.hasPrevious}" class="page-item">
+						    	<a class="page-link" th:href="'/re?pageIndex='+${page.current-1}+'&seachInfo='+seachInfo" th:text="${page.current-1}">1</a></li>
+						    <li class="page-item active" aria-current="page">
+							      <span class="page-link" th:text="${page.current}">2
+							      </span>
+							    </li>
+						    <li th:if="${page.current+1<=totalPages}" class="page-item">
+						    	<a class="page-link" th:href="'/re?pageIndex='+${page.current+1}+'&seachInfo='+seachInfo"  th:text="${page.current+1}">3</a></li>
+						    <li th:if="${page.current+2<=totalPages}" class="page-item">
+						    	<a class="page-link" th:href="'/re?pageIndex='+${page.current+2}+'&seachInfo='+seachInfo"  th:text="${page.current+2}">4</a></li>
+						    <li th:if="${page.current+3<=totalPages}" class="page-item">
+						    	<a class="page-link" th:href="'/re?pageIndex='+${page.current+3}+'&seachInfo='+seachInfo"  th:text="${page.current+3}">5</a></li>
+						    <li class="page-item" th:classappend="${!page.hasNext}?'disabled' ">
+						      <a class="page-link" th:href="'/re?pageIndex='+${page.current+1}+'&seachInfo='+seachInfo" aria-label="Next">
+						        <span aria-hidden="true">&raquo;</span>
+						      </a>
+						    </li>
+						  </ul>
+						</nav>
+					</div>
+				</div>
+				<!-- 页面展示 end -->
+</html>

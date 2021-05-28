@@ -39,7 +39,7 @@ public class FirstFrameRefaceTaskUtil {
     	if(enableReface) {
 //    		enableReface  = false;
     		List<Video> videoList = videoService.getVideoAll(); // 获取前三个所有视频列表 0,1,2
-    		String srcPath = "//home//xwcbxy//video//"; //公共资源路径
+    		String srcPath = "//mnt//file//sea//"; //公共资源路径
             // 生成对应的第一帧图像 
     		VideoUtil videoUtil = new VideoUtil();
     		

@@ -10,6 +10,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 
 
 @EnableScheduling // 开启定时任务功能
@@ -28,6 +31,13 @@ public class SeaWaterApplication {
 		fasConverter.setFastJsonConfig(fastJsonConfig);
 		HttpMessageConverter<?> converter = fasConverter;
 		return new HttpMessageConverters(converter); 
+	}
+	
+	@Bean
+	public MybatisPlusInterceptor mybatisPlusInterceptor() {
+		MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+		interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+		return interceptor;
 	}
 
 	public static void main(String[] args) {

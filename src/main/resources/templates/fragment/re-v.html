@@ -1,0 +1,8 @@
+<html xmlns:th="http://www.thymeleaf.org" >
+	<div th:each="info:${page.records}" class="src-eare" style="width: 200px;height: 160px;  position:relative; margin:0 10px 10px 20px;">
+	    <a th:href="@{'/showPage?id='+${info.getId()}}" style="width:200px;height:1600px;">
+	        <img th:src="'http://210.37.8.148:8888/sea/'+${info.getiIconPath()}" style="width:100%;height:140px;">	
+			<span th:text="${info.getiTitle()}">标题</span>   
+	 	</a>
+	</div>
+</html>

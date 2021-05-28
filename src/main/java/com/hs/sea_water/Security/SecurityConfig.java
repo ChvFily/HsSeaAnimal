@@ -15,7 +15,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.csrf().disable() // 禁用 post 安全问题 重在
 		.headers().frameOptions().disable().and()
 		.authorizeRequests()
-		.antMatchers("/","/getTest/**","/showPage","srs/***","/streams.do","/liveDetails/**","/clients")
+		.antMatchers("/","/getTest/**","/showPage","srs/***",
+				"/streams.do","/liveDetails/**","/clients",
+				"/re/**","/seach**")
 		.permitAll() ; // 都可以访问
 	}
 }
