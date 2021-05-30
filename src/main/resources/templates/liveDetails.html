@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body style="background: #fff;">
-	<div th:if="${live!=null}" class="container px-1 d-flex flex-column justify-content-center mt-0 bg-dark">
+	<div style="margin-top:10px;">
+		<p th:text="'直播：'+${live.name}" style="text-align:center">标题 -</p>
+		<p  id="dateTime" style="text-align:center">时间</p>
+	</div>
+	<div th:if="${live!=null}" class="container px-1 d-flex flex-column justify-content-center mt-0 bg-dark" style="margin-top: 5px;">
 		 <video id="videoElement" controls>
 		 	<source th:src="@{${live.url}+'.m3u8'}">
 		 </video>
@@ -53,6 +57,25 @@
   	  		var v_id = document.getElementById('v_id').value;
   		 	$('#onlineclients').load("/clients?id="+v_id); 
   	  }
-</script>
+  	  
+  	  // 显示系统时间
+        Date.prototype.format = function (fmt) {
+            var o = {
+                "y+": this.getFullYear, //年
+                "M+": this.getMonth() + 1, //月份
+                "d+": this.getDate(), //日
+                "h+": this.getHours(), //小时
+                "m+": this.getMinutes(), //分
+                "s+": this.getSeconds() //秒
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+        setInterval("document.getElementById('dateTime').innerHTML = (new Date()).format('yyyy-MM-dd hh:mm:ss');", 1000);
+    </script>
+ 
+
 </body>
 </html>

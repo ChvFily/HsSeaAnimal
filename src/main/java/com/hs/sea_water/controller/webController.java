@@ -166,6 +166,35 @@ public class webController implements ErrorController{
 	}
 	
 	/**
+	 * 根据 i_code 搜索资源
+	 * @author chvfily
+	 * @since 2021-05-30	 
+	 **/
+	@RequestMapping("/seachType")
+	public String seachType(Model model,Integer pageIndex,String seachInfo) {
+		
+		if(pageIndex==null||pageIndex<1) pageIndex=1;
+		//System.out.println(a.toString()); 
+		Page<Info> p = new Page<>(pageIndex,12);
+		long totalPages = 0; //总页数
+		try {
+			IPage<Info> rs = is.page(p,Wrappers.lambdaQuery(Info.class)
+					.like(Info::getiCode, seachInfo)  //搜索关键字段的数据
+					.orderByDesc(Info::getId));
+			totalPages = rs.getPages();
+		}catch (Exception e) {
+			e.printStackTrace();	
+		}
+		
+		// 封装 Page 
+		model.addAttribute("page",p);
+		model.addAttribute("seachInfo",seachInfo);
+		model.addAttribute("totalPages",totalPages);
+		return "fragment/re"; 
+		
+	}
+	
+	/**
 	 * 根据检索或分类返回视频数据
 	 * 
 	 * */
@@ -209,7 +238,8 @@ public class webController implements ErrorController{
 		}else {
 			try {
 				IPage<Info> rs = is.page(p,Wrappers.lambdaQuery(Info.class)
-						.eq(Info::getiTitle, seachInfo)  //搜索关键字段的数据
+						//.eq(Info::getiTitle, seachInfo)  //搜索关键字段的数据
+						.like(Info::getiTitle, seachInfo)
 						.orderByDesc(Info::getId));
 				totalPages = rs.getPages();
 			}catch (Exception e) {

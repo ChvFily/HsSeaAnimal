@@ -22,28 +22,30 @@
 						<nav aria-label="Page navigation example">
 						  <ul class="pagination justify-content-center">
 						    <li class="page-item " th:classappend="${!page.hasPrevious}?'disabled' ">
-						    	<a class="page-link" th:href="'/re?pageIndex='+${page.current-1}+'&seachInfo='+seachInfo" aria-label="Previous">
+						    	<a class="page-link" aria-label="Previous" onclick="pre()">
+						    		<input id="pre" type="hidden" th:value="${page.current-1}"/>
 							        <span aria-hidden="true">&laquo;</span>
 							     </a>
 						    </li>
 						    <li th:if="${page.current-3>0}" class="page-item">
-						    	<a class="page-link" th:href="'/re?pageIndex='+${page.current-3}+'&seachInfo='+seachInfo" th:text="${page.current-3}">1</a></li>
+						    	<a class="page-link"  th:text="${page.current-3}" onclick="re(this)">1</a></li>
 						    <li th:if="${page.current-2>0}" class="page-item">
-						    	<a class="page-link" th:href="'/re?pageIndex='+${page.current-2}+'&seachInfo='+seachInfo" th:text="${page.current-2}">1</a></li>
+						    	<a class="page-link"  th:text="${page.current-2}" onclick="re(this)">1</a></li>
 						    <li th:if="${page.hasPrevious}" class="page-item">
-						    	<a class="page-link" th:href="'/re?pageIndex='+${page.current-1}+'&seachInfo='+seachInfo" th:text="${page.current-1}">1</a></li>
-						    <li class="page-item active" aria-current="page">
-							      <span class="page-link" th:text="${page.current}">2
+						    	<a class="page-link"  th:text="${page.current-1}" onclick="re(this)">1</a></li>
+						    <li class="page-item active" aria-current="page" >
+							      <span class="page-link" th:text="${page.current}" onclick="re(this)">2
 							      </span>
 							    </li>
 						    <li th:if="${page.current+1<=totalPages}" class="page-item">
-						    	<a class="page-link" th:href="'/re?pageIndex='+${page.current+1}+'&seachInfo='+seachInfo"  th:text="${page.current+1}">3</a></li>
+						    	<a class="page-link"   th:text="${page.current+1}" onclick="re(this)">3</a></li>
 						    <li th:if="${page.current+2<=totalPages}" class="page-item">
-						    	<a class="page-link" th:href="'/re?pageIndex='+${page.current+2}+'&seachInfo='+seachInfo"  th:text="${page.current+2}">4</a></li>
+						    	<a class="page-link"  th:text="${page.current+2}" onclick="re(this)">4</a></li>
 						    <li th:if="${page.current+3<=totalPages}" class="page-item">
-						    	<a class="page-link" th:href="'/re?pageIndex='+${page.current+3}+'&seachInfo='+seachInfo"  th:text="${page.current+3}">5</a></li>
+						    	<a class="page-link"   th:text="${page.current+3}" onclick="re(this)">5</a></li>
 						    <li class="page-item" th:classappend="${!page.hasNext}?'disabled' ">
-						      <a class="page-link" th:href="'/re?pageIndex='+${page.current+1}+'&seachInfo='+seachInfo" aria-label="Next">
+						      <a class="page-link"  aria-label="Next" onclick="bac()">
+						      	<input id="bac" type="hidden" th:value="${page.current+1}"/>
 						        <span aria-hidden="true">&raquo;</span>
 						      </a>
 						    </li>

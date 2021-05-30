@@ -17,7 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.authorizeRequests()
 		.antMatchers("/","/getTest/**","/showPage","srs/***",
 				"/streams.do","/liveDetails/**","/clients",
-				"/re/**","/seach**")
+				"/re/**","/seach**","/seachType**")
 		.permitAll() ; // 都可以访问
 	}
 }
