@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>登录</title>
+</head>
+<body>
+<div >
+    <!-- spring表单标签，用于模型绑定和自动添加隐藏的CSRF token标签 -->
+    <sf:form action="${pageContext.request.contextPath}/log" method="POST" commandName="user">
+        <h1 >登录</h1>
+        <!--  登陆失败会显示这句话 -->
+        <c:if test="${error==true}"><p style="color: red">错误的帐号或密码</p></c:if>　　　　　　
+        <!-- 退出登陆会显示这句话 -->
+        <c:if test="${logout==true}"><p >已退出登录</p></c:if>　　　　　　　　　　　　　　　　　　　　
+        
+        <sf:input path="username" name="user.username"  placeholder="输入帐号" /><br />
+        <sf:password path="password" name="user.password"  placeholder="输入密码" /><br />
+        <!-- 是否记住我功能勾选框 -->
+        <input id="remember-me" name="remember-me" type="checkbox"/>　　　　　　　　　　　　　　　　
+        <label for="remember-me">一周内记住我</label>
+        <input type="submit" class="sumbit" value="提交" >
+    </sf:form>
+</div>
+</body>
+</html>

@@ -2,7 +2,9 @@ package com.hs.sea_water.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -25,5 +27,8 @@ public interface IInfoMapper extends BaseMapper<Info>{
 	 * */
 	@Select("select * from info")
 	public List<Info> getVideoAll();
+	
+	@Delete("DELETE FROM info WHERE id=#{infoId}")
+	public int delById(@Param("infoId") Integer infoId);
 
 }

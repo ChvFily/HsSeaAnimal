@@ -1,0 +1,78 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title th:text="${title}">后台管理-海洋科普平台</title>
+  <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css"  media="all">
+</head>
+
+<body>
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo layui-hide-xs layui-bg-black">海洋生物科普</div>
+    <!-- 头部区域（可配合layui 已有的水平导航） -->
+    <ul id="headLeft" class="layui-nav layui-layout-left">
+      
+      <li class="layui-nav-item layui-hide-xs"><a href="">消息</a></li>
+    </ul>
+    <ul id="headRight" class="layui-nav layui-layout-right" >
+      <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+        <a href="javascript:;">
+          <img src="http://210.37.8.148:8888/sea/icon/head.jpg" class="layui-nav-img">
+          admin
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">修改密码</a></dd>
+          <dd><a href="">退出</a></dd>
+        </dl>
+      </li>
+
+    </ul>
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul id= "menuLeft" class="layui-nav layui-nav-tree" lay-filter="test" >
+        <li class="layui-nav-item layui-nav-itemed" lay-options="{mid: 11}">
+          <a class="" href="javascript:;">海洋生物管理</a>
+          <dl class="layui-nav-child">
+            <dd lay-options="{mid: 11}"><a href="javascript: $('#main-content').load('http://210.37.8.148:8086/admin/getContent')">内容管理</a></dd>
+            <dd lay-options="{mid: 12}"><a href="javascript: $('#main-content').load('http://210.37.8.148:8086/admin/getType')" >分类管理</a></dd>
+            <dd lay-options="{mid: 13}"><a href="javascript: $('#main-content').load('http://210.37.8.148:8086/admin/getLunbo')">轮播管理</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item" lay-options="{mid: 20}"><a href="javascript:;">联系我们管理</a></li>
+      </ul>
+
+    </div>
+  </div>
+  
+  <div id="main-content" class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">欢迎用户回来</div>
+  </div>
+  
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    Copyright © 2021 海南师范大学
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="  crossorigin="anonymous"></script>
+<script src="https://www.layuicdn.com/layui/layui.js"  charset="utf-8"></script>
+<script>
+//JS 
+layui.use(['element', 'layer', 'util','dropdown'], function(){
+  var element = layui.element
+  ,layer = layui.layer
+  ,util = layui.util
+  ,dropdown = layui.dropdown
+  ,$ = layui.$;
+  
+
+});
+
+</script>
+</body>
+</html>

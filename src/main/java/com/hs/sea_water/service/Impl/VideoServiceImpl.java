@@ -1,4 +1,4 @@
-package com.hs.sea_water.serviceI.mpl;
+package com.hs.sea_water.service.Impl;
 
 import java.util.List;
 

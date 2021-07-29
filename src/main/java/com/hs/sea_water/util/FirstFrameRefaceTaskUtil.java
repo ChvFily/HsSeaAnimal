@@ -14,7 +14,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hs.sea_water.entity.Video;
-import com.hs.sea_water.mapper.IVideoMapper;
 import com.hs.sea_water.service.IVideoService;
 
 
@@ -35,9 +34,8 @@ public class FirstFrameRefaceTaskUtil {
 	 * */
     @Scheduled(cron = "0 */1 * * * ?")  //每分钟 且每天更新一次 
     public void execute() {
-    	
     	if(enableReface) {
-//    		enableReface  = false;
+    		enableReface  = false;
     		List<Video> videoList = videoService.getVideoAll(); // 获取前三个所有视频列表 0,1,2
     		String srcPath = "//mnt//file//sea//"; //公共资源路径
             // 生成对应的第一帧图像 
@@ -45,12 +43,11 @@ public class FirstFrameRefaceTaskUtil {
     		
     		for(Video video:videoList){
     			if(videoList.size()!=0) {
-    				String videoFileName =  srcPath+video.getvPath();  // /home/xwcbxy/video/hs_an_videos/
+    				String str = video.getvPath();  // /home/xwcbxy/video/hs_an_videos/
+    				String str1=str.substring(0, str.indexOf("/sea"));
+    			    String videoFileName = "/mnt/file/"+str.substring(str1.length()+1, str.length());
     				String title = Helper.getNamtAndTime(videoFileName);
     	            String outputPath = srcPath+"videoImg//"+title+".jpg"; // /home/xwcbxy/video/videoImg/test.mp4
-    	            
-//    	            videoFileName ="D:/video/turtles.mp4";
-//    	            outputPath = "D:/videoImg/turtles.jpg";
     	            
     	            int index = 5;
     	            File file = new File(outputPath);

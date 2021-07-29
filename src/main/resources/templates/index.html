@@ -51,7 +51,10 @@
 		  <li class="layui-nav-item"><a href="">首页</a></li>
 		  <li class="layui-nav-item"><a href="">团队介绍</a></li>
 		  <li class="layui-nav-item"><a href="">联系我们</a></li>
+		  <!-- http://210.37.8.148:8086/admin/ -->
+		  <!-- <li class="layui-nav-item" style="float: right;"><a href="http://210.37.8.148:8086/admin/">后台入口</a></li> -->
 		</ul>
+		<div style="clear: both;"></div>
 		
         <div class="layui-carousel" id="test2" style="margin:10px auto;">
 		  <div carousel-item="">
@@ -96,7 +99,6 @@
             <!-- 清除浮动 -->
 			<div class="clear-float-1" style="clear:both"></div>
             <!-- @yuxuahng 2021/04/26 end -->
-            
         </div>
          
         <hr style="margin:10px auto;" width="90%">
@@ -190,7 +192,7 @@
 					align-content: flex-start;">
 	                <div th:each="info:${page.records}" class="src-eare" style="width: 200px;height: 160px;  position:relative; margin:0 10px 10px 20px;">
 	                   	<a th:href="@{'/showPage?id='+${info.getId()}}" style="width:200px;height:160px;">
-	                   		<img th:src="'http://210.37.8.148:8888/sea'+${info.getiIconPath()}" style="width:100%;height:140px;">	
+	                   		<img th:src="${info.getiIconPath()}" style="width:100%;height:140px;">	
 							<span th:text="${info.getiTitle()}">标题</span>   
 				    	</a>
 	                </div>
@@ -245,7 +247,7 @@
         <!-- <include src="./boom.html"></include> -->
 
         <div class="boom">
-            <p>技术支持 @ 技术项目组-海南师范大学信息网络与数据中心 </p>
+            <p>   海南师范大学 </p>
         </div>
         <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

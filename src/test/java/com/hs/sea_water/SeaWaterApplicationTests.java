@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hs.sea_water.entity.Video;
-import com.hs.sea_water.serviceI.mpl.VideoServiceImpl;
+import com.hs.sea_water.service.Impl.VideoServiceImpl;
 
 @SpringBootTest
 class SeaWaterApplicationTests {

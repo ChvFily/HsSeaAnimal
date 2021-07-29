@@ -25,13 +25,16 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hs.sea_water.entity.FileServer;
+import com.hs.sea_water.entity.ImageEntity;
 import com.hs.sea_water.entity.Info;
 import com.hs.sea_water.entity.Video;
+import com.hs.sea_water.mapper.IImageMapper;
 import com.hs.sea_water.mapper.IInfoMapper;
 import com.hs.sea_water.mapper.IVideoMapper;
+import com.hs.sea_water.service.IImageService;
 import com.hs.sea_water.service.IInfoService;
 import com.hs.sea_water.service.IVideoService;
-import com.hs.sea_water.serviceI.mpl.FileServerServiceImpl;
+import com.hs.sea_water.service.Impl.FileServerServiceImpl;
 import com.hs.sea_water.srs.OnPublish;
 import com.hs.sea_water.util.VideoUtil;
 
@@ -44,8 +47,10 @@ public class webController implements ErrorController{
 	
 	@Autowired IInfoMapper m_infoMapper;
 	@Autowired IVideoMapper m_videoMapper;
+	@Autowired IImageMapper m_imageMapper;
 	@Autowired IVideoService vs;
 	@Autowired IInfoService is;
+	@Autowired IImageService iis;// imageServer
 	@Autowired FileServerServiceImpl fss; // 实现类
 	@Autowired RestTemplate rt;
 	
@@ -57,10 +62,10 @@ public class webController implements ErrorController{
 		List<FileServer> fsList = fss.list();  // 获取服务器列表 （多个IP）
 		for(FileServer fs:fsList) {
 			String api = "http://"+fs.getServerIp()+":"+fs.getSrsApiPort(); //http://210.37.1.20:11985/api/v1/streams/
-			String url = api+"/api/v1/streams/";   // http://ip:11985/api/v1/streams/ 推流接口 推流情况
+			String url = api+"/api/v1/streams/";      // http://ip:11985/api/v1/streams/ 推流接口 推流情况
 			String rs =  rt.getForObject(url, String.class); // 获取所有的视频流数据   
 			JSONObject jo = JSONObject.parseObject(rs);  //  划分多个视频流数据 推流个数 stream 
-			JSONArray arr = jo.getJSONArray("streams");  // 获取视频流的组
+			JSONArray arr = jo.getJSONArray("streams");  //  获取视频流的组
 			//获取推流
 			for(int i=0;i<arr.size();i++) {
 				JSONObject s = arr.getJSONObject(i);
@@ -93,7 +98,7 @@ public class webController implements ErrorController{
 		//获取视频流列表
 		List<OnPublish> liveList = getActiveStreams();  //返回 
 		String url = "";
-		 //String dir = "D:\\liveTempImg/";  //本地图片
+    	//String dir = "D:\\liveTempImg/";  //本地图片
 		
 		//String path =fsList.get(0).getServerDocDir();
 		String dir = "//mnt//file//sea//liveImg//"; 
@@ -143,6 +148,29 @@ public class webController implements ErrorController{
 		return "index";
 	}
 	
+	/**
+	 * 返回团队介绍页面
+	 * 
+	 * @author chvfily
+	 * @since 2021-06-03
+	 * */
+	@RequestMapping("/showTeam") 
+	public String reviewTeam() {
+		
+		return "show-team";
+	}
+	
+	/**
+	 * 返回团队联系我们页面
+	 * 
+	 * @author chvfily
+	 * @since 2021-06-03
+	 * */
+	@RequestMapping("/showUs") 
+	public String reviewUs() {
+		
+		return "show-us";
+	}
 	
 	/**
 	 * 搜索关键字提示
@@ -160,7 +188,8 @@ public class webController implements ErrorController{
 	    queryWrapper.like("i_title", seach);
 	    infos = m_infoMapper.selectList(queryWrapper);
 	    for (Info info:infos) {
-	    	titleList+= info.getiTitle()+",";
+	    	if(!titleList.contains(info.getiTitle()))
+	    		titleList+= info.getiTitle()+",";
 	    }
 		return titleList ;
 	}
@@ -267,8 +296,23 @@ public class webController implements ErrorController{
 		 * */
 		Info info = is.getInfoById(id);
 		Video video =vs.getVideoById(info.getvId());
+		ImageEntity imageEntity = iis.getImageById(info.getiId());
+		String src_type = "";
+		String str = info.getiCode().substring(0,1);
+		if(str.equals("1"))
+			src_type = "动物";
+		if(info.getiCode().substring(0,1).equals("2"))
+			src_type = "植物";
+		if(info.getiCode().substring(0,1).equals("3"))
+			src_type = "直播";
+		if(info.getiCode().substring(0,1).equals("4"))
+			src_type = "少儿";
+		
+		model.addAttribute("srcType",src_type);
 		model.addAttribute("video",video);
 		model.addAttribute("info",info);
+		model.addAttribute("image",imageEntity);
+		
 		return "show-page";
 	}
 	

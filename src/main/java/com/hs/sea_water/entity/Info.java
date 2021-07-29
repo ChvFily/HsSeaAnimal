@@ -41,7 +41,112 @@ public class Info {
 	
 	@TableField("i_icon_path")
 	private String iIconPath;
+	@TableField("kingdom")
+	private String kingdom;
+	@TableField("phylum")
+	private String phylum;
+	@TableField("cla")
+	private String cla;
+	@TableField("ord")
+	private String ord;
+	@TableField("family")
+	private String family;
+	@TableField("genus")
+	private String genus;
+	@TableField("species")
+	private String species;
+	@TableField("distribution")
+	private String distribution;
+	@TableField("shape_features")
+	private String shapeFeatures;
+	@TableField("ecological_habit")
+	private String ecologicalHabit;
+	@TableField("grow")
+	private String grow;
+	public String getiSaveTime() {
+		return iSaveTime;
+	}
+	public void setiSaveTime(String iSaveTime) {
+		this.iSaveTime = iSaveTime;
+	}
+	@TableField("survival_status")
+	private String survivalStatus;
+	@TableField("i_save_time")
+	private String iSaveTime;
 	
+	
+	public String getKingdom() {
+		return kingdom;
+	}
+	public void setKingdom(String kingdom) {
+		this.kingdom = kingdom;
+	}
+	public String getPhylum() {
+		return phylum;
+	}
+	public void setPhylum(String phylum) {
+		this.phylum = phylum;
+	}
+	public String getCla() {
+		return cla;
+	}
+	public void setCla(String cla) {
+		this.cla = cla;
+	}
+	public String getOrd() {
+		return ord;
+	}
+	public void setOrd(String ord) {
+		this.ord = ord;
+	}
+	public String getFamily() {
+		return family;
+	}
+	public void setFamily(String family) {
+		this.family = family;
+	}
+	public String getGenus() {
+		return genus;
+	}
+	public void setGenus(String genus) {
+		this.genus = genus;
+	}
+	public String getSpecies() {
+		return species;
+	}
+	public void setSpecies(String species) {
+		this.species = species;
+	}
+	public String getDistribution() {
+		return distribution;
+	}
+	public void setDistribution(String distribution) {
+		this.distribution = distribution;
+	}
+	public String getShapeFeatures() {
+		return shapeFeatures;
+	}
+	public void setShapeFeatures(String shapeFeatures) {
+		this.shapeFeatures = shapeFeatures;
+	}
+	public String getEcologicalHabit() {
+		return ecologicalHabit;
+	}
+	public void setEcologicalHabit(String ecologicalHabit) {
+		this.ecologicalHabit = ecologicalHabit;
+	}
+	public String getGrow() {
+		return grow;
+	}
+	public void setGrow(String grow) {
+		this.grow = grow;
+	}
+	public String getSurvivalStatus() {
+		return survivalStatus;
+	}
+	public void setSurvivalStatus(String survivalStatus) {
+		this.survivalStatus = survivalStatus;
+	}
 	public String getiIconPath() {
 		return iIconPath;
 	}

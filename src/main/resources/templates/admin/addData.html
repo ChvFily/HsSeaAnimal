@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="utf-8">
+    <title>添加数据</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css"  media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+  </head>
+ 
+  <body>
+<!-- 添加页面表单 -->
+<form id="popupForm" class="layui-form">
+    <div class="layui-form-item">
+      <label class="layui-form-label">中文名称</label>
+      <div class="layui-input-block">
+        <input type="text" name="i_title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+      </div>
+      
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">英文名称</label>
+        <div class="layui-input-block">
+          <input type="text" name="i_name" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+        </div> 
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+          <label class="layui-form-label">物种分类</label>
+          <div class="layui-input-inline">
+            <select name="i_code">
+              <option value="">请选择分类</option>
+              <optgroup label="动物">
+                <option value="1111">养殖</option>
+                <option value="1112">有毒</option>
+                <option value="1113">濒危</option>
+                <option value="1114">最字</option>
+              </optgroup>
+              <optgroup label="植物">
+                <option value="2111">养殖</option>
+                <option value="2112">有毒</option>
+                <option value="2113">濒危</option>
+                <option value="2114">最字</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+    </div>
+    
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>图片上传</legend>
+      </fieldset>
+        <!-- 用来存放上传成功后的返回的图片表中对应视频的id -->
+        <input type="hidden" name="imgId" id="img_id">   
+        <div class="layui-upload" >
+            <button type="button" class="layui-btn" id="test1">上传图片</button>
+            <div class="layui-upload-list" > 
+              <img style="width: 95px;height: 95px;" class="layui-upload-img" id="demo1">
+              <p id="demoText"></p>
+            </div>
+            <div style="width: 95px; " >
+              <div  class="layui-progress layui-progress-big" lay-showpercent="yes" lay-filter="demo">
+                <div   class="layui-progress-bar" lay-percent=""></div>
+              </div>
+            </div>
+        </div> 
+    
+        <div class="layui-upload" >
+            <button type="button" class="layui-btn" id="test2">上传图片</button>
+            <div class="layui-upload-list" >
+              <img style="width: 95px;height: 95px;" class="layui-upload-img" id="demo2">
+              <p id="demoText2"></p>
+            </div>
+            <div style="width: 95px;" >
+              <div  class="layui-progress layui-progress-big" lay-showpercent="yes" lay-filter="demo2">
+                <div  class="layui-progress-bar" lay-percent=""></div>
+              </div>
+            </div>
+        </div>
+      
+    
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>上传视频</legend>
+    </fieldset>
+    <!-- 用来存放上传成功后的返回的视频表中对应视频的id -->
+    <input type="hidden" name="videoId" id="video_id">
+    <div class="layui-form-item" id="videoUp">
+        <label class="layui-form-label" style="height: 137px; line-height: 137px">视频</label>
+        <!-- 存放视频url 地址 -->
+        <input name="classVideo" id="videourl"  value="" autocomplete="off" class="layui-input" type="hidden">
+        <div class=" layui-upload-drag" id="video" style="border-left: 0px;" type="video">
+            <i class="layui-icon">&#xe654;</i>
+            <p>点击上传</p>
+            <video id="videoupid" src="" style="height: 137px;width: 137px;" ></video>
+        </div>
+        <input type="button" value="预览" onclick="openVideo()" style="margin-left: 30px">
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">简介</label>
+        <div class="layui-input-block">
+          <textarea name="i_introduce" placeholder="请输入简介" class="layui-textarea"></textarea>
+        </div>
+      </div>
+
+    <div class="layui-form-item">
+      <div class="layui-inline">
+        <div class="layui-inline">
+            <label class="layui-form-label">界</label>
+            <div class="layui-inline">
+              <input type="text" name="kingdom" lay-verify="title" autocomplete="off" placeholder="请输入界" class="layui-input">
+            </div>
+        </div>
+      </div>
+
+      <div class="layui-inline">
+        <div class="layui-inline">
+            <label class="layui-form-label">门</label>
+            <div class="layui-inline">
+              <input type="text" name="phylum" lay-verify="title" autocomplete="off" placeholder="请输入界" class="layui-input">
+            </div>
+        </div>
+      </div>
+
+      <div class="layui-inline">
+        <div class="layui-inline">
+            <label class="layui-form-label">纲</label>
+            <div class="layui-inline">
+              <input type="text" name="cla" lay-verify="title" autocomplete="off" placeholder="请输入界" class="layui-input">
+            </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+          <div class="layui-inline">
+              <label class="layui-form-label">目</label>
+              <div class="layui-inline">
+                <input type="text" name="ord" lay-verify="title" autocomplete="off" placeholder="请输入界" class="layui-input">
+              </div>
+          </div>
+        </div>
+  
+        <div class="layui-inline">
+          <div class="layui-inline">
+              <label class="layui-form-label">科</label>
+              <div class="layui-inline">
+                <input type="text" name="family" lay-verify="title" autocomplete="off" placeholder="请输入界" class="layui-input">
+              </div>
+          </div>
+        </div>
+  
+        <div class="layui-inline">
+          <div class="layui-inline">
+              <label class="layui-form-label">属</label>
+              <div class="layui-inline">
+                <input type="text" name="genus" lay-verify="title" autocomplete="off" placeholder="请输入界" class="layui-input">
+              </div>
+          </div>
+        </div>
+  
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+          <div class="layui-inline">
+              <label class="layui-form-label">种</label>
+              <div class="layui-inline">
+                <input type="text" name="species" lay-verify="title" autocomplete="off" placeholder="请输入界" class="layui-input">
+              </div>
+          </div>
+        </div>
+  
+        <div class="layui-inline">
+          <div class="layui-inline">
+              <label class="layui-form-label">分布</label>
+              <div class="layui-inline">
+                <input type="text" name="distribution" lay-verify="title" autocomplete="off" placeholder="请输入界" class="layui-input">
+              </div>
+          </div>
+        </div>
+  
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">外形特征</label>
+      <div class="layui-input-block">
+        <textarea name="shape_features" placeholder="请输入内容" class="layui-textarea"></textarea>
+      </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">外形特征</label>
+        <div class="layui-input-block">
+          <textarea name="ecological_habit" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+      </div>
+      <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">生长繁殖</label>
+        <div class="layui-input-block">
+          <textarea name="grow" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+      </div>
+      <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">生存现状</label>
+        <div class="layui-input-block">
+          <textarea name="survival_status" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+      </div>
+    
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button lay-filter="userAdd" class="layui-btn layui-btn-primary"  lay-submit="">提交</button>
+      </div>
+    </div>
+  </form>
+<!-- layui -js  引自己的   jquery.js  随意引哪里的 -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="  crossorigin="anonymous"></script>
+<script src="https://www.layuicdn.com/layui/layui.js"  charset="utf-8"></script>
+<script>
+
+    layui.use(['form', 'layedit', 'laydate','upload', 'element', 'layer'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate
+            ,upload = layui.upload
+            ,element = layui.element
+            ,layer = layui.layer
+            ,$ = layui.jquery;
+
+        //监听submit提交按钮 button ，lay-filter 为 userAdd 的
+        form.on('submit(userAdd)', function(data){
+            //此段代码可以获取提交的数据
+        //    layer.alert(JSON.stringify(data.field), {
+        //         title: '最终的提交信息'
+        //     })
+
+           //ajax  提交成功后再 上传 图片和视频（点击上传事件）
+            $.ajax({
+                type: "POST",
+                dataType: "text",
+                url: "/admin/contentSave" ,//url 提交接口
+                data: $('#popupForm').serialize(),  //序列化表单数据  传过去的表单数据
+                success: function (result) {
+                    if (result = "seccess") {
+                        layer.msg('添加成功，1秒后自动关闭该窗口');
+                        //延迟1秒执行，目的是让用户看到提示  // 后面需要修改关闭弹窗的问题
+                        setTimeout( function(){
+                            //1、先得到当前iframe层（弹出层）的索引  ///2、提交成功关闭弹出层窗口
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                        }, 1 * 1000 );
+                    };
+                },
+                error : function() {
+                    layer.msg('后台异常！未添加成功');
+                }
+            });
+            //阻止页面跳转
+            return false;
+        });
+
+        //自定义表单验证
+        //lay-verify ：对应userr、pass、等，required 为必填项
+        form.verify({
+            user: function(value){
+                if(value.length < 2){
+                    return '用户名至少得2个字符啊';
+                }
+            }
+            ,pass: [
+                /^[\S]{6,12}$/
+                ,'密码必须6到12位，且不能出现空格'
+            ]
+            ,content: function(value){
+                layedit.sync(editIndex);
+            }
+        });
+
+        //上传视频
+        var uploadInst=upload.render({
+                elem: '#video'
+                ,url: '/admin/uploadVideo' //上传视频接口
+                ,field:"layuiVideo"
+                ,size: 5000000 //显示视频上传
+                ,accept: 'video' //视频
+                ,filters: {
+                    max_file_size: '3gb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
+                    mime_types: [//允许文件上传类型
+                        {title: "files", extensions: "mpg,m4v,mp4,flv,3gp,mov,avi,rmvb,mkv,wmv"}
+                    ]
+                }
+                ,choose:function(obj){
+                    var videoId= $('#video_id').val()
+                    this.data={"dir":"media","videoId":videoId} //携带参数
+                }
+                ,done: function(res){
+                    if(res.code==1){
+                        layer.alert(res.message,5);
+                    }
+                    if(res.error>0){
+                        return layer.msg(res.message);
+                    }
+                    if(res.error==0){
+                        // alert("res.url:"+res.url);
+                        $("#videourl").val(res.url);
+                        $("#videoupid").attr("src",res.url);
+                        $("#video_id").val(res.v_id); // 复制 视频表中对应的id
+                        layer.alert("上传成功",{offset:['90px','90px'],icon:6});
+                    }
+                }
+                ,error:function () {
+                    // //演示失败状态，并实现重传
+                    // var demoText = $('#demoText');
+                    // demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                    // demoText.find('.demo-reload').on('click', function () {
+                    //     uploadInst.upload();
+                    // });
+                }
+        });
+        
+        //图片一 
+        var uploadInst = upload.render({
+            elem: '#test1'
+            ,url: '/admin/uploadImg' //改成您自己的上传接口
+            ,field:"image"
+            ,choose:function(obj){
+                var imgId= $('#img_id').val()
+                this.data={"imgId":imgId,"imgNum":1} //携带参数
+            }
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+                
+                element.progress('demo', '0%'); //进度条复位
+                layer.msg('上传中', {icon: 16, time: 0});
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                //上传成功的一些操作
+                //……
+                $('#img_id').val(res.img_id);
+                var imgId= $('#img_id').val()
+                layer.msg('得到imgId:'+imgId);
+                $('#demoText').html(''); //置空上传失败的状态
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+            //进度条
+            ,progress: function(n, elem, e){
+                element.progress('demo', n + '%'); //可配合 layui 进度条元素使用
+                if(n == 100){
+                    layer.msg('上传完毕', {icon: 1});
+                }
+            }
+        }); 
+
+        //图片二 
+        var uploadInst2 = upload.render({
+            elem: '#test2'
+            ,url: '/admin/uploadImg' //改成您自己的上传接口
+            ,field:"image"
+            ,choose:function(obj){
+                var imgId= $('#img_id').val()
+                this.data={"imgId":imgId,"imgNum":2}//携带参数
+            }
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo2').attr('src', result); //图片链接（base64）
+                });
+                
+                element.progress('demo2', '0%'); //进度条复位
+                layer.msg('上传中', {icon: 16, time: 0});
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                //上传成功的一些操作
+                //……
+                
+                $('#img_id').val(res.img_id);
+                var imgId= $('#img_id').val();
+                layer.msg('得到imgId:'+imgId);
+                $('#demoText2').html(''); //置空上传失败的状态
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText2 = $('#demoText2');
+                demoText2.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText2.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+            //进度条
+            ,progress: function(n, elem, e){
+                element.progress('demo2', n + '%'); //可配合 layui 进度条元素使用
+                if(n == 100){
+                    layer.msg('上传完毕', {icon: 1});
+                }
+            }
+        });
+        
+    });
+
+    //预览视频
+    function openVideo() {
+        var vUrl = document.getElementById("videourl").value; //获取视频url
+        var index = layer.open({
+            type: 2,
+            content: '/admin/goLook?vUrl='+vUrl,
+            area: ['600px', '450px'],
+            offset:'t',
+            maxmin: true,
+            end: function () {
+
+            }
+        });
+    }
+    
+</script>
+</body>
+</html>
